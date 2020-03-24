@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "build": "webpack --mode production",
-    "dev": "webpack-dev-server --open"
+    "build": "webpack --env.NODE_ENV=production",
+    "dev": "webpack-dev-server --open --env.NODE_ENV=development & node index.js"
   },
   "keywords": [],
   "author": "",
