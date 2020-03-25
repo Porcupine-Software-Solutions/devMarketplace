@@ -3,8 +3,10 @@
  * @description Middleware functions pertaining to making SQL calls
  *
  * @insertBid inserts new bid, should redirect to /getmarkets @ endpoint
- * @getUserByName given a username grab first sql row
- * @insertNewUser
+ * @getUserByName given a username grab first sql row that contains that username and attach to res.locals
+ * @insertNewUser inserts new user into the db given a proper username and hashed pw
+ * @getMarkets grab markets data from db and attach it to res.locals
+ * @insertMarket inserts a market to the db (need to attach user_id via jwt.verify beforehand)
  */
 
 const db = require("../models/marketModel.js");
@@ -84,9 +86,10 @@ dbController.getMarkets = (req, res, next) => {
   pool.query(
     `
     SELECT posts.post_id, 
-         users.username
-    FROM public.posts as posts
-    LEFT JOIN public.bids as bids 
+    ON bids.post_id = posts.post_id
+    ON bids.post_id = posts.post_id
+    ON bids.post_id = posts.post_id
+    ON bids.post_id = posts.post_id
     ON bids.post_id = posts.post_id
     LEFT JOIN public.users as users
     ON users.user_id = bids.bid_by
