@@ -18,13 +18,8 @@ class Login extends Component {
     })
       .then((res) => res.json())
       .then((json) => {
-        if (json.message === 'successful register') {
-          fetch('/secondredirect', {
-            method: 'GET',
-            redirect: 'follow',
-          }).then((response) => {
-            window.location.href = response.url;
-          });
+        if (json.authorized) {
+          //we'll dispatch an action when users register, that will then change the state of authorized from false to true.
         }
       });
   }
