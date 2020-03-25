@@ -8,6 +8,9 @@ const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
+//const {isAuthorized, arrayify} = require("helpers.js")
+//const dbController = require("./controllers/dbcontroller")
+//const ioController = require("./controllers/ioController")
 
 const secret = "aksdjhfwqeirouywqoieruydnbmzxc";
 

@@ -1,9 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 
-const masterController = {};
+const helper = {};
 
-masterController.isAuthorized = (req, res, next) => {
+helper.isAuthorized = (req, res, next) => {
   //authorization middleware
   if (req.cookies.authorized) {
     let authorized = jwt.verify(req.cookies.authorized, secret, {
@@ -18,7 +18,7 @@ masterController.isAuthorized = (req, res, next) => {
   return next("no cookies");
 };
 
-masterController.arrayify = arr => {
+helper.arrayify = arr => {
   const newArray = [];
   const toBeModified = [];
   for (let i = 0; i < arr.length; i++) {
@@ -61,4 +61,4 @@ masterController.arrayify = arr => {
   return newArray;
 };
 
-module.exports = masterController;
+module.exports = helper;
