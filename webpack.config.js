@@ -1,12 +1,10 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = (env) => ({
-  entry: {
-    login: path.resolve(__dirname, './client/login.jsx'),
-    second: path.resolve(__dirname, './client/second.jsx'),
-  },
+  entry: path.resolve(__dirname, './client/index.js'),
   output: {
     path: path.resolve(__dirname, './dist'),
+    filename: 'bundle.js',
   },
   mode: env.NODE_ENV,
   devServer: {
@@ -32,16 +30,4 @@ module.exports = (env) => ({
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      chunks: ['login'],
-      template: path.resolve(__dirname, './client/login.html'),
-      filename: 'login.html',
-    }),
-    new HtmlWebpackPlugin({
-      chunks: ['second'],
-      template: path.resolve(__dirname, './client/secondpage.html'),
-      filename: 'secondpage.html',
-    }),
-  ],
 });
