@@ -103,4 +103,5 @@ class Marketplace extends Component {
   }
 }
 
-render(<Marketplace />, document.getElementById('root'));
+// render(<Marketplace />, document.getElementById('root'));
+export default Marketplace;
