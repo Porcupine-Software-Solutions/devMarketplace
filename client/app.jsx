@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Login from './components/login.jsx';
-import Marketplace from './components/marketplace';
+import Marketplace from './components/marketplace.jsx';
 class App extends Component {
   constructor() {
     super();
