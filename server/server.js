@@ -8,9 +8,6 @@ const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
-//const {isAuthorized, arrayify} = require("helpers.js")
-//const dbController = require("./controllers/dbcontroller")
-//const ioController = require("./controllers/ioController")
 
 const secret = "aksdjhfwqeirouywqoieruydnbmzxc";
 
@@ -259,7 +256,7 @@ app.get("/second", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  return res.status(200).sendFile(path.resolve(__dirname, "./index.html"));
+  return res.status(200).sendFile(path.resolve(__dirname, "../index.html"));
 });
 
 app.use((err, req, res, next) => {
