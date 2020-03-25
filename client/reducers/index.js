@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 
 // import all reducers here
-import marketsReducer from './marketplaceReducer';
+import marketplaceReducer from './marketplaceReducer';
 import loginReducer from './loginReducer';
 
 // combine reducers
 const reducers = combineReducers({
-  markets: marketsReducer,
+  markets: marketplaceReducer,
   logins: loginReducer,
 });
 
