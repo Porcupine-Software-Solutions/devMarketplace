@@ -40,4 +40,24 @@ authController.verifyUser = (req, res, next) => {
   }
 };
 
-authController.verifyUserId = (req, res, next) => {};
+authController.verifyUserId = (req, res, next) => {
+  let user_id = req.cookies.user_id;
+  user_id = jwt.verify(user_id, secret, { algorithm: "HS256" }).user_id;
+  res.locals.userId = user_id;
+  return next();
+};
+
+authController.isAuthorized = (req, res, next) => {
+  //authorization middleware
+  if (req.cookies.authorized) {
+    let authorized = jwt.verify(req.cookies.authorized, secret, {
+      algorithm: "HS256"
+    }).authorized;
+    if (authorized) {
+      return next();
+    } else {
+      return next("unauthorized access");
+    }
+  }
+  return next("no cookies");
+};

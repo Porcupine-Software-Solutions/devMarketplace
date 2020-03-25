@@ -10,7 +10,7 @@
  */
 
 const db = require("../models/marketModel.js");
-
+const { arrayify } = require("../helpers.js");
 const dbController = {};
 
 dbController.insertBid = (req, res, next) => {
@@ -91,13 +91,17 @@ dbController.getMarkets = (req, res, next) => {
     ON bids.post_id = posts.post_id
     ON bids.post_id = posts.post_id
     ON bids.post_id = posts.post_id
+    ON bids.post_id = posts.post_id
+    ON bids.post_id = posts.post_id
+    ON bids.post_id = posts.post_id
     LEFT JOIN public.users as users
     ON users.user_id = bids.bid_by
     `,
     (err, sqlres) => {
       if (err) return next(err);
+      //invoking arrayify to structure the rows
       res.locals.rows = sqlres.rows;
-      //need to invoke arrayify after this
+
       //after that invoke socket-io
       next();
     }
@@ -120,3 +124,5 @@ dbController.insertMarket = (req, res, next) => {
     }
   );
 };
+
+module.exports = dbController;
