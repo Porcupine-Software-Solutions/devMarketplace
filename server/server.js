@@ -17,7 +17,7 @@ const pool = new Pool({
   connectionString: dbURI
 });
 
-app.use(express.static(path.resolve(__dirname, "./dist")));
+app.use("/dist/", express.static(path.resolve(__dirname, "./dist")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -256,7 +256,7 @@ app.get("/second", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  return res.status(200).sendFile(path.resolve(__dirname, "./dist/login.html"));
+  return res.status(200).sendFile(path.resolve(__dirname, "./index.html"));
 });
 
 app.use((err, req, res, next) => {
