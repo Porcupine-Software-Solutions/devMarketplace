@@ -1,6 +1,6 @@
 import * as types from '../constants/actionTypes';
 
-const initalState = {
+const initialState = {
   authorized: false,
 };
 
