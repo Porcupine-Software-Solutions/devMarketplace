@@ -100,7 +100,7 @@ app.post("/login", (req, res) => {
           maxAge: 43200000,
           httpOnly: true
         });
-        return res.status(200).send({ message: "successful login" });
+        return res.status(200).send({ message: tr });
       } else {
         return res.status(418).send({ message: "invalid username/password" });
       }

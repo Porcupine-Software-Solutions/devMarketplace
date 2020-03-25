@@ -10,7 +10,7 @@
  */
 
 const db = require("../models/marketModel.js");
-const { arrayify } = require("../helpers.js");
+const { arrayify } = require("../helpers");
 const dbController = {};
 
 dbController.insertBid = (req, res, next) => {
@@ -45,14 +45,18 @@ dbController.getUserByName = (req, res, next) => {
         `,
     [username],
     (err, sqlres) => {
-      if (err) return next(err);
+      //console.log(sqlres);
+      if (err){
+        console.log("Error in getUserByName");
+        return next(err);
+      }
       // if (sqlres.rows.length === 0)
       //   return next("Error: invalid username/password!");
 
       //  no check if there is a user by id, just nabbing the data and putting it in res.locals
       res.locals.user = sqlres.rows[0];
       //  next function should be jwt middleware to sign in and set cookies
-      //  OR register a user if getUserById returns an empty array
+      //  OR register a user if getUserById attaches undefined to res.locals (register route)
       return next();
     }
   );
@@ -64,43 +68,45 @@ dbController.insertNewUser = (req, res, next) => {
   if (res.locals.user) return next("Error: Username already taken!");
   const { username } = req.body;
   const hashedPwd = res.locals.hashedPwd;
-  pool.query(
+  db.query(
     `
     INSERT INTO public.users (username, password)
     VALUES ($1, $2)
-    RETURNING user_id;
+    RETURNING user_id, username, password;
     `,
     [username, hashedPwd],
     (err, sqlres) => {
+      console.log(sqlres);
       if (err) return next(err);
       //  need to invoke jwt authentication and cookie storage after this
       //  so need to set relevant data in res.locals from the sqlres rows
       //  user is a object containing the single sql row of user
-      res.locals.user = sqlres.rows[0];
+      res.locals.user = sqlres.rows[0];      
       return next();
     }
   );
 };
 
 dbController.getMarkets = (req, res, next) => {
-  pool.query(
+  db.query(
     `
     SELECT posts.post_id, 
-    ON bids.post_id = posts.post_id
-    ON bids.post_id = posts.post_id
-    ON bids.post_id = posts.post_id
-    ON bids.post_id = posts.post_id
-    ON bids.post_id = posts.post_id
-    ON bids.post_id = posts.post_id
-    ON bids.post_id = posts.post_id
-    ON bids.post_id = posts.post_id
-    LEFT JOIN public.users as users
-    ON users.user_id = bids.bid_by
+         posts.title,
+         posts.description,
+         --bids.post_id as bid_post_id,
+         bids.amount, 
+         bids.bid_by,
+         users.username
+  FROM public.posts as posts
+  LEFT JOIN public.bids as bids 
+  ON bids.post_id = posts.post_id
+  LEFT JOIN public.users as users
+  ON users.user_id = bids.bid_by
     `,
     (err, sqlres) => {
       if (err) return next(err);
       //invoking arrayify to structure the rows
-      res.locals.rows = sqlres.rows;
+      res.locals.rows = arrayify(sqlres.rows);
 
       //after that invoke socket-io
       next();
@@ -110,7 +116,7 @@ dbController.getMarkets = (req, res, next) => {
 
 dbController.insertMarket = (req, res, next) => {
   //need to invoke jwtcontroller before this to verify and grab proper user id
-  pool.query(
+  db.query(
     `
     INSERT INTO public.posts (title, description, posted_by_id, posted_at)
     VALUES ($1, $2, $3, NOW()::timestamp);
