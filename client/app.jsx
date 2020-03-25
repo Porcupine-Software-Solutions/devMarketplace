@@ -17,6 +17,7 @@ class App extends Component {
     if (this.state.loggedIn === true) {
       return <Marketplace />;
     }
+    // if user is online, render video chat component on marketplace
     //if engineer, return job seeker page
     //if employer, return employer page
   }
