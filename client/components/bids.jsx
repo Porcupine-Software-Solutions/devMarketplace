@@ -1,4 +1,5 @@
 import React from 'react';
+import { authorize, changePost, addBid } from '../actions/actions.js';
 
 const Bids = (props) => {
   const bids = [];
@@ -14,7 +15,7 @@ const Bids = (props) => {
       bids.push(
         <li>
           {`${props.bidInfo.bids[i].username} : $${props.bidInfo.bids[i].amount}`}
-          <a href="https://basic-vid-chat-rb.herokuapp.com">contact dev</a>
+          <button onClick = {() => props.becomeVideo(true)}>Contact Dev</button>
         </li>,
       );
     }

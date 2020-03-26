@@ -1,3 +1,7 @@
+/**
+ * @name index.js 
+ * @description centralized server file including all endpoints 
+ */
 const path = require("path");
 const express = require("express");
 const app = express();
@@ -6,6 +10,7 @@ const io = require("socket.io")(http);
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const PORT = 3000;
+
 const dbController = require("./controllers/dbController");
 const authController = require("./controllers/authController");
 const ioController = require("./controllers/ioController");
@@ -15,6 +20,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/dist", express.static(path.resolve(__dirname, "../dist")));
+
+io.on('connection', socket => {
+  socket.join('secret-market');
+  socket.on('localPeerId', id => {
+    socket.broadcast.emit('remotePeerId', id);
+  })
+  console.log('Connected Room with socket');
+})
+
+
 app.use((req, res, next) => {
   req.io = io;
   return next();
@@ -49,16 +64,17 @@ authController.verifyUser,
 //  Route to get markets
 app.get("/getmarkets", 
 authController.isAuthorized,
-ioController.openSocket,
+//ioController.openSocket,
 dbController.getMarkets, 
 ioController.emitUpdate, 
 (req, res,) => {
-  return res.status(200).send(res.locals.rows);
+  return res.status(200).json(res.locals.rows);
   }
 )
 //  Route to add market
 app.post("/addmarket", 
 authController.isAuthorized,
+authController.verifyUserId,
 dbController.insertMarket,
 (req, res) => {
   return res.redirect(301, "/getmarkets")
