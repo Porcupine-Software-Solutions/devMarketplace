@@ -1,4 +1,6 @@
 import React from 'react';
+import { authorize, changePost, addBid } from '../actions/actions.js';
+
 const Market = (props) => {
   return (
     <div className={'market-display'}>
