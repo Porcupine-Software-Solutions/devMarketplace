@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
+    "test": "jest --verbose --env.NODE_ENV=test",
     "start": "nodemon ./server/server.js",
     "build": "webpack --env.NODE_ENV=production",
-    "dev": "webpack-dev-server --open --env.NODE_ENV=development & node ./server/server.js"
+    "dev": "webpack-dev-server --open --env.NODE_ENV=development & nodemon ./server/server.js"
   },
   "keywords": [],
   "author": "",
