@@ -4,7 +4,7 @@ import { authorize, changePost, addBid } from '../actions/actions.js';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
-  logins: state.logins.authorized,
+  logins: state.logins.authorized
 });
 
 const mapDispatchToProps = (dispatch) => ({

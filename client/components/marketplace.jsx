@@ -7,7 +7,6 @@ import { authorize, addPost, changeBid } from '../actions/actions.js';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
-  logins: state.logins.authorized,
   markets: state.markets.markets,
 });
 
@@ -113,4 +112,4 @@ const Marketplace = (props) => {
 };
 
 // render(<Marketplace />, document.getElementById('root'));
-export default connect(mapDispatchToProps, mapStateToProps)(Marketplace);
+export default connect(mapStateToProps, mapDispatchToProps)(Marketplace);
