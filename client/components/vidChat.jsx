@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { render } from 'react-dom';
 
-class VidChat extends { Component }{
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
+const VidChat = (props) => {
+    useEffect(async () => {
         const myVideo = document.getElementById("my-video");
         const peerVideo = document.getElementById("peer-video");
         
@@ -40,17 +36,16 @@ class VidChat extends { Component }{
         call.on('stream', (stream) => {
             peerVideo.srcObject = stream;
         });
-        
     }
+    ,[])
 
-    render() {
-        return (
+    return (
             <div>
                 <video id="my-video" width="300" autoPlay="autoplay" ></video>
                 <video id="peer-video" width="300" autoPlay="autoplay" ></video>
             </div>
-        )
-    }
+    )
 }
+
 
 export default VidChat;
