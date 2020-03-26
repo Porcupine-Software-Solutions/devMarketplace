@@ -1,3 +1,7 @@
+/**
+ * @name helpers.js
+ * @description contains arrayify function to format data before sending to client
+ */
 const fs = require("fs");
 const path = require("path");
 

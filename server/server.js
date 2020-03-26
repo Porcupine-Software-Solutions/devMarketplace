@@ -1,3 +1,7 @@
+/**
+ * @name index.js 
+ * @description centralized server file including all endpoints 
+ */
 const path = require("path");
 const express = require("express");
 const app = express();
