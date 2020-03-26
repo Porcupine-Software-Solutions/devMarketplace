@@ -7,21 +7,6 @@ const path = require("path");
 
 const helper = {};
 
-// helper.isAuthorized = (req, res, next) => {
-//   //authorization middleware
-//   if (req.cookies.authorized) {
-//     let authorized = jwt.verify(req.cookies.authorized, secret, {
-//       algorithm: "HS256"
-//     }).authorized;
-//     if (authorized) {
-//       return next();
-//     } else {
-//       return next("unauthorized access");
-//     }
-//   }
-//   return next("no cookies");
-// };
-
 helper.arrayify = arr => {
   const newArray = [];
   const toBeModified = [];
