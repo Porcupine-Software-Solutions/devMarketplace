@@ -99,7 +99,7 @@ const Marketplace = (props) => {
   //there will be an if statement here based on state to render either market or vid chat
   if (props.video) {
     //emit from socket something to tell the server to get peer ids
-    return (<VidChat/>)
+    return (<VidChat socket={socket} />)
   }
   else {
     return (
