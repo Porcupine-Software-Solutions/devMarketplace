@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --verbose --env.NODE_ENV=test",
     "start": "nodemon ./server/server.js",
     "build": "webpack --env.NODE_ENV=production",
-    "dev": "webpack-dev-server --open --env.NODE_ENV=development & node ./server/server.js"
+    "dev": "webpack-dev-server --open --env.NODE_ENV=development & nodemon ./server/server.js"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +18,8 @@
     "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^25.2.1",
+    "supertest": "^4.0.2",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"

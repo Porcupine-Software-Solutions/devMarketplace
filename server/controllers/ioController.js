@@ -1,3 +1,9 @@
+/**
+ * @name ioController.js
+ * @description Middleware to handle socket.io functionality
+ * @openSocket instantiates the connection;
+ * @emitUpdate sends updated server data to client-side
+ */
 const ioController = {};
 
 ioController.openSocket = (req, res,next) => {
