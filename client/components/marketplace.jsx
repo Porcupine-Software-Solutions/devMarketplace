@@ -36,7 +36,7 @@ const Marketplace = (props) => {
   };
   useEffect(() => {  
     getMarkets();
-  });
+  },[]);
   const addMarket = () => {
     const marketName = document.getElementById('market-to-add').value;
     const description = document.getElementById('job-description').value;
@@ -77,7 +77,6 @@ const Marketplace = (props) => {
         props.changeBid(json);
       });
   };
-  getMarkets();
 
   const marketsToRender = [];
   for (let i = 0; i < props.markets.length; i++) {
