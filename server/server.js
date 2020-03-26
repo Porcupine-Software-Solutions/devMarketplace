@@ -23,8 +23,13 @@ app.use("/dist", express.static(path.resolve(__dirname, "../dist")));
 
 io.on('connection', socket => {
   socket.join('secret-market');
+  socket.on('localPeerId', id => {
+    socket.broadcast.emit('remotePeerId', id);
+  })
   console.log('Connected Room with socket');
 })
+
+
 app.use((req, res, next) => {
   req.io = io;
   return next();
