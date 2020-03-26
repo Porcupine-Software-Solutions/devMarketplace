@@ -2,12 +2,14 @@ import React, { Component , useEffect}  from 'react';
 import { render } from 'react-dom';
 import Market from './market.jsx';
 import Bids from './bids.jsx';
+import VidChat from './vidChat.jsx';
 const socket = io();
-import { authorize, addPost, changeBid } from '../actions/actions.js';
+import { authorize, addPost, changeBid, makeVid } from '../actions/actions.js';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
   markets: state.markets.markets,
+  video: state.markets.video
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -20,6 +22,9 @@ const mapDispatchToProps = (dispatch) => ({
   addPost: (markets) => {
     return dispatch(addPost(markets));
   },
+  makeVid: (video) => {
+    return dispatch(makeVid(video));
+  }
 });
 
 const Marketplace = (props) => {
@@ -77,7 +82,9 @@ const Marketplace = (props) => {
         props.changeBid(json);
       });
   };
-
+  const turnVideoOn = (bool) => {
+    props.makeVid(bool);
+  }
   const marketsToRender = [];
   for (let i = 0; i < props.markets.length; i++) {
     // console.log(this.state.markets[i]);
@@ -85,32 +92,40 @@ const Marketplace = (props) => {
     marketsToRender.push(
       <div className="market-bid">
         <Market marketInfo={post} />
-        <Bids makeBid={makeBid} bidInfo={post} />
+        <Bids makeBid={makeBid} becomeVideo = {turnVideoOn} bidInfo={post} />
       </div>,
     );
   }
-  return (
-    <div className="market-container">
-      <h1 style={{ textAlign: 'center' }}>Marketplace</h1>
-      <hr />
-      <div className="itemBox">
-        <div className="item">
-          <span>Job Title: </span>
-          <input id="market-to-add"></input>
-          <br />
+  //there will be an if statement here based on state to render either market or vid chat
+  if (props.video) {
+    //emit from socket something to tell the server to get peer ids
+    return (<VidChat/>)
+  }
+  else {
+    return (
+      <div className="market-container">
+        <h1 style={{ textAlign: 'center' }}>Marketplace</h1>
+        <hr />
+        <div className="itemBox">
+          <div className="item">
+            <span>Job Title: </span>
+            <input id="market-to-add"></input>
+            <br />
+          </div>
+          <div className="item">
+            <span>Job Description: </span>
+            <input id="job-description"></input>
+            <br />
+          </div>
+          <div className="item">
+            <button onClick={() => addMarket()}>Submit Market</button>
+          </div>
         </div>
-        <div className="item">
-          <span>Job Description: </span>
-          <input id="job-description"></input>
-          <br />
-        </div>
-        <div className="item">
-          <button onClick={() => addMarket()}>Submit Market</button>
-        </div>
+        <div id="markets">{marketsToRender}</div>
       </div>
-      <div id="markets">{marketsToRender}</div>
-    </div>
-  );
+    );
+  }
+  
 };
 
 // render(<Marketplace />, document.getElementById('root'));

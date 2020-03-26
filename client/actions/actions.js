@@ -15,6 +15,11 @@ export const changeBid = (markets) => ({
   payload: { markets },
 });
 
+export const makeVid = (videoTime) => ({
+  type: types.VIDEO,
+  payload: { video: videoTime }
+})
+
 //AUTHORIZED = 'AUTHORIZED';
 // export const ADD_POSTING = 'ADD_POSTING';
 // export const BID = 'BID';
