@@ -1,4 +1,5 @@
 import React from 'react';
+import { authorize, changePost, addBid } from '../actions/actions.js';
 
 const Bids = (props) => {
   const bids = [];
