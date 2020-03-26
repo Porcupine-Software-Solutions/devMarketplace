@@ -1,24 +1,28 @@
+/**
+ * @name helpers.js
+ * @description contains arrayify function to format data before sending to client
+ */
 const fs = require("fs");
 const path = require("path");
 
-const masterController = {};
+const helper = {};
 
-masterController.isAuthorized = (req, res, next) => {
-  //authorization middleware
-  if (req.cookies.authorized) {
-    let authorized = jwt.verify(req.cookies.authorized, secret, {
-      algorithm: "HS256"
-    }).authorized;
-    if (authorized) {
-      return next();
-    } else {
-      return next("unauthorized access");
-    }
-  }
-  return next("no cookies");
-};
+// helper.isAuthorized = (req, res, next) => {
+//   //authorization middleware
+//   if (req.cookies.authorized) {
+//     let authorized = jwt.verify(req.cookies.authorized, secret, {
+//       algorithm: "HS256"
+//     }).authorized;
+//     if (authorized) {
+//       return next();
+//     } else {
+//       return next("unauthorized access");
+//     }
+//   }
+//   return next("no cookies");
+// };
 
-masterController.arrayify = arr => {
+helper.arrayify = arr => {
   const newArray = [];
   const toBeModified = [];
   for (let i = 0; i < arr.length; i++) {
@@ -61,4 +65,4 @@ masterController.arrayify = arr => {
   return newArray;
 };
 
-module.exports = masterController;
+module.exports = helper;
