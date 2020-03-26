@@ -69,6 +69,7 @@ ioController.emitUpdate,
 //  Route to add market
 app.post("/addmarket", 
 authController.isAuthorized,
+authController.verifyUserId,
 dbController.insertMarket,
 (req, res) => {
   return res.redirect(301, "/getmarkets")

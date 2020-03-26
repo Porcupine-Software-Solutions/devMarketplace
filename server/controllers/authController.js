@@ -64,7 +64,7 @@ authController.verifyUser = (req, res, next) => {
 authController.verifyUserId = (req, res, next) => {
   let user_id = req.cookies.user_id;
   user_id = jwt.verify(user_id, secret, { algorithm: "HS256" }).user_id;
-  res.locals.userId = user_id;
+  res.locals.user_id = user_id;
   return next();
 };
 
