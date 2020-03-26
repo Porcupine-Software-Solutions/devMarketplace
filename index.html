@@ -1,154 +1,176 @@
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/peerjs@0.3.20/dist/peer.min.js"></script>
-    <title>Log In</title>
-  </head>
-  <style>
-    .Auth {
-      text-align: center;
-      border: 1px solid;
-      margin: auto;
-      width: 20rem;
-      min-height: 20rem;
-    }
 
-    input {
-      margin: 5px;
-      display: block;
-      background: 0;
-      border: 0;
-      border-bottom: 2.25px solid black;
-      color: black;
-      font-weight: 500;
-      outline: 0;
-    }
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/peerjs@0.3.20/dist/peer.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <title>DevMarketplace</title>
+</head>
+<style>
+  .Auth {
+    text-align: center;
+    border: 1px solid;
+    margin: auto;
+    width: 20rem;
+    min-height: 20rem;
+    background-color: #e6ebff;
+    border: 5px solid rgb(230, 235, 255, 0.3);
+    border-radius: 15px;
+    box-shadow: 0.5rem 0.5rem 2rem 0 #bdbdbd;
+    /* display: flex;
+    flex-wrap: wrap;
+    align-items: center; */
+  }
 
-    .innerBtn {
-      border-radius: 6px;
-      padding: 10px;
-      width: 40%;
-      outline: none;
-      background-color: #0074d9;
-      font-size: 1rem;
-      font-weight: 600;
-      color: white;
-    }
+  input {
+    margin: 5px;
+    display: block;
+    background: 0;
+    border: 0;
+    border-bottom: 2.25px solid black;
+    color: black;
+    font-weight: 500;
+    outline: 0;
+  }
 
-    .innerItem {
-      margin-bottom: 25px;
-    }
+  .innerBtn {
+    /* margin: auto; */
+    border-radius: 6px;
+    /* padding: 10px; */
+    width: 40%;
+    outline: none;
+    background-color: #0074d9;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+  }
 
-    .innerItem:nth-child(3) {
-      margin-top: 4rem;
-      padding: 5px;
-      display: flex;
-      justify-content: space-evenly;
-    }
+  .innerItem {
+    margin-bottom: 25px;
+  }
 
-    .innerBox {
-      position: flex;
-      flex-wrap: wrap;
-      width: 50%;
-      margin: auto;
-    }
+  .innerItem:nth-child(3) {
+    margin-top: 4rem;
+    /* padding: 5px; */
+    display: flex;
+    justify-content: space-evenly;
+  }
 
-    .otherBtn {
-      margin: 10px;
-    }
-    body{
-        font-size: 1.25rem;
-      }
+  .innerBox {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 150%;
+    margin-left: 25px;
+  }
 
-      .market-display {
-        width: 40%;
-        margin: 5px;
-        border: 1px solid;
-        padding: 5px;
-        word-wrap: break-word;
-      }
-      .market-bid {
-        display: flex;
-      }
+  .otherBtn {
+    margin: 10px;
+  }
 
-      .itemBox {
-        width: 40%;
-        margin: auto;
-        display: flex;
-        justify-content: space-evenly;
-      }
+  body {
+    font-size: 1.25rem;
+    background-color: #e6e6e6;
 
-      input {
-        border-radius: 0.2rem;
-        outline: none;
-        box-sizing: border-box;
-        margin: 8px 0;
-        padding: 10px 10px;
-        font-size: inherit;
-      }
+  }
 
-      button {
-        outline: none;
-        border-radius: 0.2rem;
-        text-decoration: none;
-        padding: 10px;
-        border: none;
-        background-color: #0074d9;
-        color: white;
-        font-weight: 600;
-        font-size: 1rem;
-      }
+  .market-display {
+    width: 40%;
+    margin: 5px;
+    border: 1px solid;
+    padding: 5px;
+    word-wrap: break-word;
+  }
 
-      .item {
-        margin-top: 10px;
-        margin-bottom: 10px;
-      }
+  .market-bid {
+    display: flex;
+  }
 
-      .bid-display {
-        width: 40%;
-        margin: 5px;
-        border: 1px solid;
-        padding: 5px;
-        display: flex;
-        flex-wrap: wrap;
-      }
+  .itemBox {
+    width: 40%;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+  }
 
-      .bidBox {
-        display: flex;
-        width: 40%;
-        justify-content: space-between;
-        margin: 0;
-        flex-wrap: wrap;
-      }
+  input {
+    border-radius: 0.2rem;
+    outline: none;
+    box-sizing: border-box;
+    margin: 8px 0;
+    padding: 10px 10px;
+    font-size: inherit;
+  }
 
-      .bidItem:nth-child(2) {
-        margin-top: auto;
-        margin-bottom: auto;
-      }
+  button {
+    outline: none;
+    border-radius: 0.2rem;
+    text-decoration: none;
+    padding: 10px;
+    border: none;
+    background-color: #0074d9;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+  }
 
-      .market-bid {
-       justify-content: center;
-      }
+  .item {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 
-      .item:nth-child(3) {
-        margin-top: auto;
-        margin-bottom: auto;
-      }
+  .bid-display {
+    width: 40%;
+    margin: 5px;
+    border: 1px solid;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #e6ebff;
 
-      ol {
-        list-style-type: decimal;
-        width: 600px;
-      }
+  }
 
-      li {
-        float: left;
-        width: 200px;
-        padding: 2px 0px;
-      }
-  </style>
-  <body>
-    <div id="root"></div>
-    <script src="dist/bundle.js"></script>
-  </body>
+  .bidBox {
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    margin: 0;
+    flex-wrap: wrap;
+  }
+
+  .bidItem:nth-child(2) {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .market-bid {
+    justify-content: center;
+  }
+
+  .item:nth-child(3) {
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: #e6ebff;
+
+
+  }
+
+  ol {
+    list-style-type: decimal;
+    width: 600px;
+  }
+
+  li {
+    float: left;
+    width: 200px;
+    padding: 2px 0px;
+  }
+</style>
+
+<body>
+  <div id="root"></div>
+  <script src="dist/bundle.js"></script>
+</body>
+
 </html>

@@ -47,13 +47,28 @@ const VidChat = props => {
   }, []);
 
   return (
-    <div>
-      <video id="my-video" width="300" autoPlay="autoplay" muted="true"></video>
+    <div style={{ backgroundColor: "#e6e6e6" }}>
+      <video
+        id="my-video"
+        width="300"
+        autoPlay="autoplay"
+        muted="true"
+        style={{
+          border: "2px solid black",
+          borderRadius: "5px",
+          margin: "10px"
+        }}
+      ></video>
       <video
         id="peer-video"
         width="300"
         autoPlay="autoplay"
         muted="true"
+        style={{
+          border: "2px solid black",
+          borderRadius: "5px",
+          margin: "10px"
+        }}
       ></video>
     </div>
   );
