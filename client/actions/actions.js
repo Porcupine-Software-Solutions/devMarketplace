@@ -1,4 +1,4 @@
-import * as types from '../constants/actionType';
+import * as types from '../constants/actionTypes.js';
 
 export const authorize = (bool) => ({
   type: types.AUTHORIZED,

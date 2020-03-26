@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import { authorize, changePost, addBid } from '../actions/actions.js';
+import { connect } from 'react-redux';
 
-class Login extends Component {
-  constructor() {
-    super();
-  }
-  register() {
+const mapStateToProps = (state) => ({
+  logins: state.logins.authorized,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  authorize: (bool) => {
+    return dispatch(authorize(bool));
+  },
+});
+
+const Login = (props) => {
+  const register = () => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     console.log(username, password);
@@ -19,11 +28,11 @@ class Login extends Component {
       .then((res) => res.json())
       .then((json) => {
         if (json.authorized) {
-          //we'll dispatch an action when users register, that will then change the state of authorized from false to true.
+          props.authorize(true);
         }
       });
-  }
-  login() {
+  };
+  const login = () => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     fetch('/login', {
@@ -35,39 +44,32 @@ class Login extends Component {
     })
       .then((res) => res.json())
       .then((json) => {
-        if (json.message === 'successful login') {
-          fetch('/secondredirect', {
-            method: 'GET',
-            redirect: 'follow',
-          }).then((response) => {
-            window.location.href = response.url;
-          });
+        if (json.authorized) {
+          props.authorize(true);
         }
       });
-  }
-  render() {
-    return (
-      <div className="Auth">
-        <h1>Login/Signup</h1>
-        <div className="innerBox">
-          <div className="innerItem">
-            <input id="username" type="text" placeholder="Username"></input>
-          </div>
-          <div className="innerItem">
-            <input id="password" type="password" placeholder="Password"></input>
-          </div>
+  };
+  return (
+    <div className="Auth">
+      <h1>Login/Signup</h1>
+      <div className="innerBox">
+        <div className="innerItem">
+          <input id="username" type="text" placeholder="Username"></input>
         </div>
         <div className="innerItem">
-          <button className="innerBtn" onClick={() => this.login()}>
-            Login
-          </button>
-          <button className="innerBtn" onClick={() => this.register()}>
-            Signup
-          </button>
+          <input id="password" type="password" placeholder="Password"></input>
         </div>
       </div>
-    );
-  }
-}
+      <div className="innerItem">
+        <button className="innerBtn" onClick={() => login()}>
+          Login
+        </button>
+        <button className="innerBtn" onClick={() => register()}>
+          Signup
+        </button>
+      </div>
+    </div>
+  );
+};
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
