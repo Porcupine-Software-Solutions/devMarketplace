@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component , useEffect}  from 'react';
 import { render } from 'react-dom';
 import Market from './market.jsx';
 import Bids from './bids.jsx';
@@ -34,6 +34,9 @@ const Marketplace = (props) => {
         props.addPost(json);
       });
   };
+  useEffect(() => {  
+    getMarkets();
+  });
   const addMarket = () => {
     const marketName = document.getElementById('market-to-add').value;
     const description = document.getElementById('job-description').value;
